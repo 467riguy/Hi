@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunset Proxy</title>
+  <title>DROP</title>
   <link rel="shortcut icon" type="x-icon" href="Icons/logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Proxy scripts -->
   <script src="/lf.js"></script>
   <script async src="https://arc.io/widget.min.js#KpYQhCTB"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWD8SS29YZ"></script>
@@ -15,46 +20,154 @@
     gtag('js', new Date());
     gtag('config', 'G-PWD8SS29YZ');
   </script>
+
+  <style>
+    /* Animated gradient background */
+    body {
+      background: linear-gradient(270deg, #0a001a, #180033, #00001a, #1a0033);
+      background-size: 800% 800%;
+      animation: gradientShift 18s ease infinite;
+      min-height: 100vh;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glowing, flickering title */
+    .title {
+      font-size: 5rem;
+      letter-spacing: 0.15em;
+      color: #b4a0ff;
+      text-shadow: 0 0 20px rgba(150, 100, 255, 0.8),
+                   0 0 40px rgba(100, 255, 255, 0.6);
+      animation: flicker 3s infinite, pulse 6s infinite alternate;
+      user-select: none;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(150, 100, 255, 0.8),
+                     0 0 40px rgba(100, 255, 255, 0.6);
+      }
+      20%, 24%, 55% {
+        opacity: 0.8;
+        text-shadow: 0 0 8px rgba(150, 100, 255, 0.4),
+                     0 0 20px rgba(100, 255, 255, 0.3);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    /* Proxy input container */
+    .proxy-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(18px);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 480px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.4s ease;
+      margin-top: 2rem;
+    }
+
+    .proxy-box:hover {
+      box-shadow: 0 0 40px rgba(129, 140, 248, 0.5);
+    }
+
+    #uv-address {
+      flex: 1;
+      padding: 14px;
+      color: #fff;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    #uv-address::placeholder {
+      color: #bbb;
+    }
+
+    button {
+      background: linear-gradient(90deg, #6366f1, #9333ea);
+      padding: 0 24px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #8b5cf6, #4f46e5);
+      transform: scale(1.05);
+    }
+
+    /* Description */
+    .desc {
+      max-width: 600px;
+      color: #c7c7ff;
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Discord link */
+    .discord-link {
+      margin-top: 2.5rem;
+      font-size: 1.1rem;
+      color: #a5b4fc;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .discord-link:hover {
+      color: #c4b5fd;
+      text-shadow: 0 0 10px rgba(165, 180, 252, 0.8);
+    }
+  </style>
 </head>
 
-<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-black min-h-screen flex flex-col items-center justify-center text-white font-sans">
-  <div class="flex flex-col items-center space-y-8 text-center">
-    <!-- Title -->
-    <h1 class="text-5xl font-bold tracking-wide drop-shadow-lg">Sunset Proxy</h1>
-    
-    <!-- Description -->
-    <p class="max-w-xl text-gray-300 leading-relaxed text-lg">
-      Browse securely and freely with <span class="text-indigo-300 font-semibold">Sunset Proxy</span> — 
-      your encrypted gateway to the open internet.
-    </p>
+<body>
+  <!-- Animated Title -->
+  <h1 class="title">DROP</h1>
 
-    <!-- Proxy Form -->
-    <form id="uv-form" class="w-full max-w-md mt-6">
-      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden" />
-      <div class="flex bg-white/10 backdrop-blur-lg rounded-xl shadow-lg border border-white/10 overflow-hidden">
-        <input 
-          id="uv-address" 
-          type="text" 
-          placeholder="Enter a URL or search query..." 
-          class="flex-1 bg-transparent text-white px-4 py-3 outline-none placeholder-gray-400"
-        />
-        <button 
-          type="submit" 
-          class="bg-indigo-600 hover:bg-indigo-500 px-6 font-semibold"
-        >
-          Go
-        </button>
-      </div>
-    </form>
+  <!-- Description -->
+  <p class="desc">
+    The future of private browsing.<br>
+    Fast, encrypted, and untraceable — powered by <span style="color:#a78bfa;">Infinite Scripter</span>.
+  </p>
 
-    <!-- Discord Invite -->
-    <div class="mt-8">
-      <a href="https://discord.gg/JFkQseF4BT" target="_blank" 
-         class="text-indigo-300 hover:text-indigo-400 font-medium text-lg underline underline-offset-4">
-         Join Our Discord
-      </a>
-    </div>
-  </div>
+  <!-- Proxy Form -->
+  <form id="uv-form" class="proxy-box">
+    <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden" />
+    <input id="uv-address" type="text" placeholder="Enter a URL or search query..." />
+    <button type="submit">Go</button>
+  </form>
+
+  <!-- Discord Invite -->
+  <a href="https://discord.gg/JFkQseF4BT" target="_blank" class="discord-link">
+    Join Our Discord
+  </a>
 
   <!-- Proxy Scripts -->
   <script src="uv/uv.bundle.js" defer></script>
