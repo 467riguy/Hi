@@ -22,7 +22,6 @@
   </script>
 
   <style>
-    /* Animated gradient background */
     body {
       background: linear-gradient(270deg, #0a001a, #180033, #00001a, #1a0033);
       background-size: 800% 800%;
@@ -35,7 +34,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     @keyframes gradientShift {
@@ -44,7 +43,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Glowing, flickering title */
+    /* Title */
     .title {
       font-size: 5rem;
       letter-spacing: 0.15em;
@@ -56,16 +55,8 @@
     }
 
     @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 20px rgba(150, 100, 255, 0.8),
-                     0 0 40px rgba(100, 255, 255, 0.6);
-      }
-      20%, 24%, 55% {
-        opacity: 0.8;
-        text-shadow: 0 0 8px rgba(150, 100, 255, 0.4),
-                     0 0 20px rgba(100, 255, 255, 0.3);
-      }
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.8; }
     }
 
     @keyframes pulse {
@@ -73,7 +64,7 @@
       100% { transform: scale(1.05); }
     }
 
-    /* Proxy input container */
+    /* Proxy Box */
     .proxy-box {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -88,10 +79,6 @@
       margin-top: 2rem;
     }
 
-    .proxy-box:hover {
-      box-shadow: 0 0 40px rgba(129, 140, 248, 0.5);
-    }
-
     #uv-address {
       flex: 1;
       padding: 14px;
@@ -102,53 +89,107 @@
       font-size: 1rem;
     }
 
-    #uv-address::placeholder {
-      color: #bbb;
-    }
-
     button {
       background: linear-gradient(90deg, #6366f1, #9333ea);
       padding: 0 24px;
       font-weight: bold;
       border: none;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: 0.3s ease;
     }
 
     button:hover {
-      background: linear-gradient(90deg, #8b5cf6, #4f46e5);
       transform: scale(1.05);
     }
 
-    /* Description */
-    .desc {
-      max-width: 600px;
-      color: #c7c7ff;
-      font-weight: 400;
-      font-size: 1.1rem;
-      margin-top: 1.5rem;
-      line-height: 1.6;
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px; /* hidden by default */
+      width: 260px;
+      height: 100vh;
+      background: rgba(20, 0, 50, 0.65);
+      backdrop-filter: blur(12px);
+      border-right: 1px solid rgba(180, 140, 255, 0.5);
+      box-shadow: 0 0 25px rgba(120, 80, 255, 0.5);
+      padding: 20px;
+      transition: left 0.35s ease;
+      z-index: 999;
     }
 
-    /* Discord link */
-    .discord-link {
-      margin-top: 2.5rem;
-      font-size: 1.1rem;
-      color: #a5b4fc;
-      text-decoration: underline;
-      text-underline-offset: 5px;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+    .sidebar.open {
+      left: 0;
     }
 
-    .discord-link:hover {
-      color: #c4b5fd;
-      text-shadow: 0 0 10px rgba(165, 180, 252, 0.8);
+    .sidebar h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #cbbfff;
+      text-shadow: 0 0 10px rgba(145, 105, 255, 0.8);
     }
+
+    .sidebar a {
+      display: block;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      color: #bda9ff;
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .sidebar a:hover {
+      color: white;
+      text-shadow: 0 0 10px rgba(180, 140, 255, 1);
+    }
+
+    /* Sidebar Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 45px;
+      height: 45px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(200,150,255,0.4);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1000;
+      transition: 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      box-shadow: 0 0 15px rgba(180,140,255,0.7);
+      transform: scale(1.1);
+    }
+
   </style>
 </head>
 
 <body>
-  <!-- Animated Title -->
+
+  <!-- Toggle Button -->
+  <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Directory</h2>
+
+    <a href="index.html">Home</a>
+    <a href="partners.html">Partners</a>
+    <a href="settings.html">Settings</a>
+    <a href="games.html">Games</a>
+    <a href="apps.html">Apps</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <!-- Title -->
   <h1 class="title">DROP</h1>
 
   <!-- Description -->
@@ -164,15 +205,23 @@
     <button type="submit">Go</button>
   </form>
 
-  <!-- Discord Invite -->
+  <!-- Discord Link -->
   <a href="https://discord.gg/W27wU3RFHf" target="_blank" class="discord-link">
     Join Our Discord
   </a>
+
+  <!-- Sidebar Script -->
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("open");
+    }
+  </script>
 
   <!-- Proxy Scripts -->
   <script src="uv/uv.bundle.js" defer></script>
   <script src="uv/uv.config.js" defer></script>
   <script src="/index.js" defer></script>
   <script src="hotkey.js"></script>
+
 </body>
 </html>
