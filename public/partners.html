@@ -75,9 +75,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-decoration: none; /* remove link underline */
+      color: white;
     }
 
-    /* 🔥 Neon Hover Effect */
     .partner-card:hover {
       transform: translateY(-10px);
       border: 1px solid rgba(160, 120, 255, 0.9);
@@ -87,7 +88,6 @@
         0 0 80px rgba(160, 120, 255, 0.3);
     }
 
-    /* Logo Glow Pulse */
     .partner-card:hover .partner-logo {
       filter: drop-shadow(0 0 15px rgba(180, 140, 255, 0.9));
       transform: scale(1.05);
@@ -124,31 +124,31 @@
   <div class="partners-grid">
 
     <!-- Partner 1 -->
-    <div class="partner-card">
+    <a href="https://verdantproxy.example" target="_blank" class="partner-card">
       <img src="Images/partner1.png" class="partner-logo" alt="Partner Logo">
       <h2 class="partner-name">Verdant</h2>
       <p class="partner-desc">
         A small web proxy with big meaning.
       </p>
-    </div>
+    </a>
 
     <!-- Partner 2 -->
-    <div class="partner-card">
+    <a href="https://arccdn.example" target="_blank" class="partner-card">
       <img src="Images/partner2.png" class="partner-logo" alt="Partner Logo">
       <h2 class="partner-name">Arc CDN</h2>
       <p class="partner-desc">
         Accelerating global performance through lightning-fast edge delivery.
       </p>
-    </div>
+    </a>
 
     <!-- Partner 3 -->
-    <div class="partner-card">
+    <a href="https://ultraviolet.example" target="_blank" class="partner-card">
       <img src="Images/partner3.png" class="partner-logo" alt="Partner Logo">
       <h2 class="partner-name">Ultraviolet</h2>
       <p class="partner-desc">
         Providing our secure and stealth-based proxy framework for private browsing.
       </p>
-    </div>
+    </a>
 
   </div>
 
